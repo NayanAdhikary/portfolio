@@ -15,6 +15,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.json({ message: "Portfolio Backend is Running!" });
+});
+
 // Routes
 app.use('/api', require('./routes/api'));
 
