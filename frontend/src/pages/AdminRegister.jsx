@@ -5,24 +5,36 @@ import { Lock, User } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : 'http://localhost:5000/api';
 
-const AdminLogin = () => {
+const AdminRegister = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
+        setSuccess('');
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            setLoading(false);
+            return;
+        }
 
         try {
-            const res = await axios.post(`${API_URL}/login`, { username, password });
-            localStorage.setItem('token', res.data.token);
-            navigate('/admin');
+            const res = await axios.post(`${API_URL}/register`, { username, password });
+            setSuccess(res.data.message || 'Registration successful. You can now log in.');
+            // Clear fields on success
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
+            setError(err.response?.data?.message || 'Registration failed');
         } finally {
             setLoading(false);
         }
@@ -35,8 +47,8 @@ const AdminLogin = () => {
 
             <div className="glass-card w-full max-w-md p-8 relative z-10 animate-fade-in" style={{ width: '100%', maxWidth: '400px', padding: '2.5rem' }}>
                 <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-2">Admin Portal</h2>
-                    <p className="text-sm text-text-secondary">Secure access required</p>
+                    <h2 className="text-2xl font-bold text-white mb-2">Admin Registration</h2>
+                    <p className="text-sm text-text-secondary">Create a new admin account</p>
                 </div>
 
                 {error && (
@@ -44,8 +56,13 @@ const AdminLogin = () => {
                         {error}
                     </div>
                 )}
+                {success && (
+                    <div style={{ padding: '0.75rem', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#6EE7B7', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.875rem' }}>
+                        {success}
+                    </div>
+                )}
 
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleRegister}>
                     <div className="input-group">
                         <label className="input-label">Username</label>
                         <div style={{ position: 'relative' }}>
@@ -56,7 +73,7 @@ const AdminLogin = () => {
                                 style={{ paddingLeft: '2.75rem' }}
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                placeholder="admin"
+                                placeholder="Choose a username"
                                 required
                             />
                         </div>
@@ -78,21 +95,37 @@ const AdminLogin = () => {
                         </div>
                     </div>
 
+                    <div className="input-group">
+                        <label className="input-label">Confirm Password</label>
+                        <div style={{ position: 'relative' }}>
+                            <Lock size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
+                            <input
+                                type="password"
+                                className="input-field"
+                                style={{ paddingLeft: '2.75rem' }}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+                    </div>
+
                     <button
                         type="submit"
                         className="btn btn-primary w-full mt-4"
                         style={{ width: '100%', marginTop: '1rem', opacity: loading ? 0.7 : 1 }}
                         disabled={loading}
                     >
-                        {loading ? 'Authenticating...' : 'Sign In'}
+                        {loading ? 'Registering...' : 'Sign Up'}
                     </button>
                 </form>
 
                 <div className="text-center mt-6">
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                        Don't have an account?{' '}
-                        <button onClick={() => navigate('/admin/register')} style={{ color: 'var(--text-accent)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
-                            Sign up
+                        Already have an account?{' '}
+                        <button onClick={() => navigate('/admin/login')} style={{ color: 'var(--text-accent)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+                            Sign in
                         </button>
                     </p>
                     <button onClick={() => navigate('/')} className="text-sm text-text-secondary hover:text-white transition-colors">
@@ -104,4 +137,4 @@ const AdminLogin = () => {
     );
 };
 
-export default AdminLogin;
+export default AdminRegister;
