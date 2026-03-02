@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import profileImg from '../assets/profile.jpg';
 
 const projectsList = [
     {
@@ -72,7 +73,7 @@ function Home() {
             <section id="hero" className="hero pattern-bg">
                 <div className="container">
                     <div className="hero-avatar fade-in">
-                        <img src={`${import.meta.env.BASE_URL}profile.jpg`} alt="Nayan Adhikary" className="profile-img" />
+                        <img src={profileImg} alt="Nayan Adhikary" className="profile-img" />
                     </div>
                     <h1 className="fade-in delay-1">
                         Hi, I'm <span className="gradient-text">Nayan Adhikary</span>
