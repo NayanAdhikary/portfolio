@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Database, BarChart2, Server, ChevronRight } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import { Link } from 'react-router-dom';
-
-const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : 'http://localhost:5000/api';
 
 const HomePage = () => {
     const [projects, setProjects] = useState([]);
@@ -18,8 +15,20 @@ const HomePage = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const res = await axios.get(`${API_URL}/projects`);
-                setProjects(res.data);
+                const res = await fetch('https://api.github.com/users/NayanAdhikary/repos?sort=updated');
+                if (!res.ok) throw new Error('Failed to fetch repositories');
+                const data = await res.json();
+                const formattedProjects = data
+                    .filter(repo => !repo.fork) // only include original projects
+                    .map(repo => ({
+                        _id: repo.id.toString(),
+                        title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                        description: repo.description || 'No description provided.',
+                        githubLink: repo.html_url,
+                        liveLink: repo.homepage || '',
+                        technologies: repo.language ? [repo.language] : []
+                    }));
+                setProjects(formattedProjects);
             } catch (err) {
                 console.error('Error fetching projects:', err);
             } finally {
@@ -29,26 +38,23 @@ const HomePage = () => {
         fetchProjects();
     }, []);
 
-    const handleContactSubmit = async (e) => {
+    const handleContactSubmit = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        try {
-            await axios.post(`${API_URL}/contact`, contactForm);
-            setSubmitStatus('success');
-            setContactForm({ name: '', email: '', message: '' });
-        } catch (err) {
-            console.error('Submission error', err);
-            setSubmitStatus('error');
-        } finally {
-            setIsSubmitting(false);
+        const subject = encodeURIComponent(`Portfolio Contact from ${contactForm.name}`);
+        const body = encodeURIComponent(`Name: ${contactForm.name}\nEmail: ${contactForm.email}\n\nMessage:\n${contactForm.message}`);
+        window.location.href = `mailto:joydevadhikary468@gmail.com?subject=${subject}&body=${body}`;
 
-            // Clear status message after 5 seconds
-            setTimeout(() => {
-                setSubmitStatus(null);
-            }, 5000);
-        }
+        setSubmitStatus('success');
+        setContactForm({ name: '', email: '', message: '' });
+        setIsSubmitting(false);
+
+        // Clear status message after 5 seconds
+        setTimeout(() => {
+            setSubmitStatus(null);
+        }, 5000);
     };
 
     return (
@@ -59,7 +65,6 @@ const HomePage = () => {
                     <Link to="/" className="font-bold text-2xl text-white tracking-tight" style={{ textDecoration: 'none' }}>
                         Nayan<span className="text-gradient">.dev</span>
                     </Link>
-                    <Link to="/admin/login" className="text-sm text-text-secondary hover:text-white transition-colors">Admin Area</Link>
                 </div>
             </nav>
 
