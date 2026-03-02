@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import profileImg from '../assets/profile-pic/profile pic.png';
+import { Link } from 'react-router-dom';
 
 const projectsList = [
     {
@@ -86,6 +87,9 @@ function Home() {
                         <a href="#projects" className="btn-primary">
                             View My Work <i className="fa-solid fa-arrow-right"></i>
                         </a>
+                        <Link to="/about" className="btn-secondary">
+                            About Me <i className="fa-regular fa-user"></i>
+                        </Link>
                         <a href="https://github.com/NayanAdhikary" target="_blank" rel="noopener noreferrer" className="btn-secondary">
                             GitHub Profile <i className="fa-brands fa-github"></i>
                         </a>
