@@ -1,7 +1,7 @@
 import React from 'react';
 
 function About() {
-    const cvPath = import.meta.env.BASE_URL + 'cv/Data Analyst_Nayan.pdf';
+    const cvPath = import.meta.env.BASE_URL + 'cv/Nayan Adhikary Software Engineer CV.pdf';
 
     return (
         <main style={{ padding: '80px 0', minHeight: '80vh' }}>
