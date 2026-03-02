@@ -23,8 +23,8 @@ function App() {
         {/* Header */}
         <header className="header">
           <div className="container nav-content">
-            <Link to="/" className="brand">
-              <span className="gradient-text">NA</span><span className="dot">.</span>
+            <Link to="/" className="brand" aria-label="Home">
+              <i className="fa-solid fa-house"></i>
             </Link>
             <nav className="nav-links">
               <Link to="/">Home</Link>
