@@ -23,7 +23,9 @@ function App() {
         {/* Header */}
         <header className="header">
           <div className="container nav-content">
-            <Link to="/" className="brand gradient-text">NA.</Link>
+            <Link to="/" className="brand">
+              <span className="gradient-text">NA</span><span className="dot">.</span>
+            </Link>
             <nav className="nav-links">
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
