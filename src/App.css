@@ -56,8 +56,8 @@
 }
 
 .hero-avatar {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   margin: 0 auto 24px;
   overflow: hidden;
@@ -70,6 +70,17 @@
   justify-content: center;
   font-size: 4rem;
   color: #fff;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hero-avatar:hover .profile-img {
+  transform: scale(1.1);
 }
 
 .hero h1 {
