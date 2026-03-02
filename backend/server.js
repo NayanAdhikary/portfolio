@@ -10,13 +10,14 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: ['http://localhost:5173', 'https://portfolio-fff7rl1vp-nayanadhikarys-projects.vercel.app', 'https://portfolio-chi-ashy.vercel.app'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.json({ message: "Portfolio Backend is Running!" });
+  res.send("Backend is running");
 });
 
 // Routes
