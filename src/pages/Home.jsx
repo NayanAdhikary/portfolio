@@ -80,8 +80,9 @@ function Home() {
                         Hi, I'm <span className="gradient-text">Nayan Adhikary</span>
                     </h1>
                     <p className="fade-in delay-2">
-                        Data Analyst & Performance Analyst specializing in Machine Learning,
-                        Data Cleaning, Exploratory Data Analysis, and Performance Insights.
+                        Data Analyst & Performance Analyst specializing in Data Cleaning,
+                        Exploratory Data Analysis, and Performance Insights, while actively
+                        expanding my skills in Machine Learning.
                     </p>
                     <div className="hero-actions fade-in delay-3">
                         <a href="#projects" className="btn-primary">
