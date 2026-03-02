@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile-pic/profile pic.png';
 
 const projectsList = [
     {
