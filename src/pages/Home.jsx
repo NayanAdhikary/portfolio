@@ -22,6 +22,11 @@ const projectsList = [
         repo: 'IPL-Cricket-Performance-Analytics',
         about: 'Data analysis project on IPL match data (2008-2025) using Python/Pandas. Computes player KPIs (strike rate, economy), visualizations for performance insights. Built for BCCI Performance Analyst portfolio.',
         link: 'https://github.com/NayanAdhikary/IPL-Cricket-Performance-Analytics'
+    },
+    {
+        repo: 'cafe-sales-data-cleaning',
+        about: 'Data cleaning project on the \'Cafe Sales – Dirty Data\' Kaggle dataset using Python and pandas. Includes raw and cleaned CSV files, cleaning pipeline (missing values, types, text standardization), and before–after comparison analysis.',
+        link: 'https://github.com/NayanAdhikary/cafe-sales-data-cleaning'
     }
 ];
 
@@ -107,7 +112,7 @@ function Home() {
 
                     <div className="projects-grid">
                         {loading
-                            ? Array.from({ length: 4 }).map((_, i) => (
+                            ? Array.from({ length: projectsList.length }).map((_, i) => (
                                 <div key={i} className="glass-card project-card">
                                     <div className="loading-pulse" style={{ height: '32px', width: '40px', marginBottom: '20px' }}></div>
                                     <div className="loading-pulse" style={{ height: '24px', width: '80%' }}></div>
