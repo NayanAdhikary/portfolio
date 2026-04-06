@@ -5,12 +5,26 @@ import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+function ScrollHandler() {
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      // Wait for DOM to render the home page content before scrolling
+      const id = hash.replace('#', '');
+      const tryScroll = (attempts = 0) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (attempts < 10) {
+          setTimeout(() => tryScroll(attempts + 1), 100);
+        }
+      };
+      setTimeout(() => tryScroll(), 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [pathname, hash]);
 
   return null;
 }
@@ -18,7 +32,7 @@ function ScrollToTop() {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <ScrollHandler />
       <div className="app-container">
         {/* Header */}
         <header className="header">
@@ -37,6 +51,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          {/* Alias routes for section deep-links */}
+          <Route path="/projects" element={<Home />} />
+          <Route path="/contact" element={<Home />} />
         </Routes>
 
         {/* Footer */}
