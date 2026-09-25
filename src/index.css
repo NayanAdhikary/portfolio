@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ef4444; /* Red 500 */
+  --color-secondary: #f59e0b; /* Amber 500 */
+  --color-accent: #dc2626; /* Red 600 */
+  --color-dark-obsidian: #030000;
+  --color-surface-glass: rgba(255, 255, 255, 0.03);
+  --color-surface-glass-hover: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #030305;
+  color: #ffffff;
+  font-family: 'Geist', 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Sleek Aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #030305;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a35;
+  border-radius: 5px;
+  border: 2px solid #030305;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Premium Glassmorphism Panel */
+.glass-panel {
+  background: rgba(20, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.glass-panel:hover {
+  border-color: rgba(239, 68, 68, 0.4); /* Red */
+  background: rgba(30, 0, 0, 0.5); /* Deep Red */
+  box-shadow: 0 8px 40px rgba(239, 68, 68, 0.15), inset 0 0 20px rgba(239, 68, 68, 0.05);
+  transform: translateY(-5px);
+}
+
+/* Animated Glowing Background Dots */
+.bg-grid {
+  background-size: 50px 50px;
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  animation: pulseGrid 8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGrid {
+  0% { opacity: 0.1; }
+  100% { opacity: 0.3; }
+}
+
+/* Glowing text effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 0 0 40px rgba(239, 68, 68, 0.2);
+}
+
+/* Orb animations */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: floatOrb 10s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+.orb-1 {
+  background: radial-gradient(circle, var(--color-primary), transparent 70%);
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+}
+.orb-2 {
+  background: radial-gradient(circle, var(--color-accent), transparent 70%);
+  width: 300px;
+  height: 300px;
+  bottom: 20%;
+  right: -50px;
+  animation-delay: -5s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -50px) scale(1.1); }
+  100% { transform: translate(-30px, 30px) scale(0.9); }
+}
