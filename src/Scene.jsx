@@ -65,13 +65,14 @@ export default function Scene() {
       <FloatingElement position={[0, 1, -5]}>
         <FadingElement fadeDistance={15}>
           <Text
-            fontSize={5}
+            fontSize={4}
             color="#ff0000"
             font="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
             anchorX="center"
             anchorY="middle"
+            textAlign="center"
           >
-            NAYAN
+            NAYAN{"\n"}ADHIKARY
           </Text>
         </FadingElement>
       </FloatingElement>
