@@ -136,7 +136,7 @@ export default function App() {
               {/* Glowing shadow behind the subject */}
               <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full scale-75"></div>
               <img 
-                src="/hero-subject.png" 
+                src="./hero-subject.png" 
                 alt="Nayan Adhikary" 
                 className="w-full h-auto drop-shadow-[0_0_30px_rgba(239,68,68,0.4)] relative z-10 filter contrast-125 saturate-110"
               />
